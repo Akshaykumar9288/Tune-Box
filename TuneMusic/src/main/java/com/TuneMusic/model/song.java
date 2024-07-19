@@ -1,9 +1,8 @@
 package com.TuneMusic.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
+
+import java.util.List;
 
 @Entity
 public class song {
@@ -15,6 +14,17 @@ public class song {
     private String artist;
     private String album;
     private String genre;
+    @ManyToOne
+    @JoinColumn(name = "playlist_id")
+    private PlayList playList;
+
+    public PlayList getPlayList() {
+        return playList;
+    }
+
+    public void setPlayList(PlayList playList) {
+        this.playList = playList;
+    }
 
     public Long getId() {
         return id;
@@ -56,12 +66,13 @@ public class song {
         this.genre = genre;
     }
 
-    public song(Long id, String title, String artist, String album, String genre) {
+    public song(Long id, String title, String artist, String album, String genre, PlayList playList) {
         this.id = id;
         this.title = title;
         this.artist = artist;
         this.album = album;
         this.genre = genre;
+        this.playList = playList;
     }
 
     public song(){}
@@ -74,6 +85,7 @@ public class song {
                 ", artist='" + artist + '\'' +
                 ", album='" + album + '\'' +
                 ", genre='" + genre + '\'' +
+                ", playList=" + playList +
                 '}';
     }
 }

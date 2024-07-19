@@ -1,14 +1,18 @@
 package com.TuneMusic.model;
 
-import jakarta.persistence.ManyToOne;
+
+import jakarta.persistence.*;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.List;
-
+@Entity
 public class PlayList {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
-    @ManyToOne
+    @OneToMany(mappedBy = "playList", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<song> songs;
 
     public String getName() {

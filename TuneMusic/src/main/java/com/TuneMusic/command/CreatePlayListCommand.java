@@ -8,7 +8,6 @@ public class CreatePlayListCommand implements Command{
 
     PlayListService service;
     PlayList list;
-    song song;
 
     public CreatePlayListCommand(PlayListService service, PlayList list){
         this.service = service;
